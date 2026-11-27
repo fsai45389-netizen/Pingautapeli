@@ -1,0 +1,12 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Pingautapeli",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "Pingautapeli",
+  "start_url": "/",
+  "theme_color": "#ffffff",
+  "description": "Jua Kama ujumbe ni ukweli au utapeli kabla ya haujatuma pesa au taarifa"
+}
