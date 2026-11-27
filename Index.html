@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pingautapeli</title>
+<link rel="manifest" href="manifest.json">
+<style><link rel="stylesheet" href="style.css">body{font-family:Arial;background:#0f172a;padding:15px;display:flex;justify-content:center}
+.box{background:white;max-width:430px;width:100%;border-radius:20px;padding:0 20px 20px 20px;text-align:center;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.4)}
+h1{background:linear-gradient(135deg,#2563eb,#7c3aed);color:white;font-size:24px;margin:0 -20px 15px -20px;padding:22px 10px}
+select,textarea{width:100%;padding:12px;border-radius:10px;border:2px solid #cbd5e1;margin:8px 0;box-sizing:border-box;font-size:15px}
+textarea{height:90px}
+button{width:100%;padding:14px;border:none;border-radius:12px;font-weight:bold;cursor:pointer;margin:5px 0}
+#angaliaBtn{background:#2563eb;color:white}
+#fundishaBtn{background:#16a34a;color:white}
+#matokeo{padding:16px;border-radius:12px;background:#e2e8f0;font-weight:bold;margin-top:10px}
+#trainStatus{background:#fef9c3;padding:10px;border-radius:20px;font-size:13px;font-weight:bold;display:inline-block}
+<div class="box"></style>
+</head>
+<body>
+  <h1>🧠 AI DETECT FRAUD V5</h1>
+  <p>Model imejifunza kutoka kwa kampuni 12</p>
+  <div id="trainStatus">📚 Inajifunza...</div>
+  <select id="kampuni">
+    <option value="Vodacom">Vodacom / M-Pesa</option>
+    <option value="Airtel">Airtel</option>
+    <option value="Tigo">Tigo</option>
+    <option value="Halotel">Halotel</option>
+    <option value="TTCL">TTCL</option>
+    <option value="CRDB">CRDB</option>
+    <option value="NMB">NMB</option>
+    <option value="NBC">NBC</option>
+    <option value="SportPesa">SportPesa / M-Bet</option>
+    <option value="Polisi">Polisi</option>
+    <option value="Nyingine">Nyingine / Sijui</option>
+  </select>
+  <textarea id="msgBox" placeholder="Weka ujumbe hapa..."></textarea>
+  <button id="angaliaBtn">🔍 AI IANGALIE</button>
+  <div id="matokeo">Model iko tayari</div>
+  <p style="font-size:12px">Model ikiona ujumbe haufanani na ilivyojifunza, itasema ni utapeli.</p>
+  <h3>➕ Fundisha Model Ujumbe Mpya Halisi</h3>
+  <textarea id="fundishaBox" placeholder="Weka ujumbe halisi wa kampuni ulioupata..."></textarea>
+  <button id="fundishaBtn">📚 FUNDISHA MODEL</button>
+</div>
+<script src="script.js"></script><script>let trainingData = [
+{text:"Mteja wetu, huduma ya M-Pesa imesimama kwa muda. Tafadhali jaribu tena baadae.", kampuni:"Vodacom", niUtapeli:false},
+{text:"Pesa ulizotuma Tsh 50000 kwa Juma zimepokelewa. Kumbukumbu: MP12345. M-Pesa", kampuni:"Vodacom", niUtapeli:false},
+{text:"Karibu M-Pesa. Salio lako ni Tsh 12000. Asante kwa kutumia Vodacom.", kampuni:"Vodacom", niUtapeli:false},
+{text:"Mteja, kifurushi chako cha 1GB kimeisha. Piga *150*00# kununua kingine.", kampuni:"Airtel", niUtapeli:false},
+{text:"Umefanikiwa kulipia kifurushi cha Airtel 5GB kwa Tsh 10000. Asante.", kampuni:"Airtel", niUtapeli:false},
+{text:"Airtel Money: Umepokea Tsh 20000 kutoka kwa Anna. Salio ni 35000.", kampuni:"Airtel", niUtapeli:false},
+{text:"Mteja wetu, Tigo Pesa yako imesimamishwa kwa muda kutokana na uthibitisho. Tafadhali wasiliana nasi.", kampuni:"Tigo", niUtapeli:false},
+{text:"Umefanikiwa kununua bando la Tigo 2GB. Salio lako ni Tsh 5000.", kampuni:"Tigo", niUtapeli:false},
+{text:"Karibu Tigo. Namba yako imesajiliwa kikamilifu. Asante.", kampuni:"Tigo", niUtapeli:false},
+{text:"Halotel: Kifurushi chako cha wiki kimeisha. Piga *150*00# kuongeza.", kampuni:"Halotel", niUtapeli:false},
+{text:"Umefanikiwa kulipia Halopesa Tsh 10000. Asante.", kampuni:"Halotel", niUtapeli:false},
+{text:"TTCL: Malipo yako ya internet yamepokelewa. Asante.", kampuni:"TTCL", niUtapeli:false},
+{text:"CRDB: Akaunti yako imepokea Tsh 150000. Salio lako ni Tsh 320000.", kampuni:"CRDB", niUtapeli:false},
+{text:"CRDB Bank: ATM yako imekaribia kuisha muda. Tafadhali tembelea tawi karibu.", kampuni:"CRDB", niUtapeli:false},
+{text:"NMB: Umepokea Tsh 50000 kutoka kwa Peter. Salio ni 120000.", kampuni:"NMB", niUtapeli:false},
+{text:"NMB Bank: Taarifa ya miamala yako ya mwezi iko tayari.", kampuni:"NMB", niUtapeli:false},
+{text:"NBC: Salio la akaunti yako ni Tsh 80000. Asante kwa kutumia NBC.", kampuni:"NBC", niUtapeli:false},
+{text:"SportPesa: Kupon yako imefanikiwa. Umejishindia Tsh 20000.", kampuni:"SportPesa", niUtapeli:false},
+{text:"M-Bet: Umeshindia Tsh 15000. Tafadhali ingia kwenye akaunti yako kuangalia.", kampuni:"SportPesa", niUtapeli:false},
+{text:"Polisi Tanzania: Kumbukumbu ya taarifa yako imepokelewa. Asante.", kampuni:"Polisi", niUtapeli:false},
+{text:"Nipe PIN yako akaunti imefungwa, tuma haraka", kampuni:"CRDB", niUtapeli:true},
+{text:"Akaunti yako imefungwa, bonyeza link hii kuthibitisha", kampuni:"Vodacom", niUtapeli:true},
+{text:"Umeshinda milioni 5, tuma namba yako ya siri kuchukua zawadi", kampuni:"Airtel", niUtapeli:true},
+{text:"Tuma pesa ili ufungue akaunti yako", kampuni:"Tigo", niUtapeli:true},
+{text:"PIN yako imeisha muda, tuma mpya sasa", kampuni:"NMB", niUtapeli:true},
+{text:"Bonyeza hapa kuokoa pesa zako kabla hazijaibiwa", kampuni:"NBC", niUtapeli:true},
+{text:"Umefungiwa, tuma pesa za kufungua", kampuni:"SportPesa", niUtapeli:true}
+];
+
+function jifunze(){
+  document.getElementById("trainStatus").innerHTML = "✅ Model imejifunza ujumbe " + trainingData.length;
+}
+function angalia(){
+  let msg = document.getElementById("msgBox").value.toLowerCase();
+  let kampuni = document.getElementById("kampuni").value;
+  let out = document.getElementById("matokeo");
+  if(!msg){ out.innerHTML="Weka ujumbe kwanza"; out.style.background="#e2e8f0"; return; }
+  let manenoHatari = ["pin","password","nywila","namba ya siri","bonyeza link","fungua","tuma pesa","umeshinda","zawadi","akaunti imefungwa","thibitisha","haraka","sasa hivi","fungiwa"];
+  let alama = 0;
+  manenoHatari.forEach(w=>{ if(msg.includes(w)) alama++; });
+  let inafanana = trainingData.some(d=> d.kampuni===kampuni && !d.niUtapeli && msg.includes(d.text.toLowerCase().substring(0,15)));
+  if(alama>=2 || (alama>=1 && !inafanana)){
+    out.innerHTML="🚨 UTAPELI! ("+Math.min(98,70+alama*10)+"%)<br>Model haijawai kuona ujumbe kama huu kutoka "+kampuni;
+    out.style.background="#fecaca";
+    let u = new SpeechSynthesisUtterance("Tahadhari! Huu ni ujumbe wa utapeli");
+    speechSynthesis.speak(u);
+  } else {
+    out.innerHTML="✅ INAONEKANA HALISI<br>Model imeuona ujumbe unaofanana";
+    out.style.background="#bbf7d0";
+  }
+}
+document.getElementById("angaliaBtn").onclick = angalia;
+document.getElementById("fundishaBtn").onclick = function(){
+  let txt = document.getElementById("fundishaBox").value;
+  let kampuni = document.getElementById("kampuni").value;
+  if(!txt){ alert("Weka ujumbe kwanza"); return; }
+  trainingData.push({text:txt, kampuni:kampuni, niUtapeli:false});
+  jifunze();
+  alert("Asante! Model imejifunza ujumbe mpya. Sasa inajua ujumbe "+trainingData.length);
+  document.getElementById("fundishaBox").value="";
+};
+jifunze();</script>
+</body>
+</html>
