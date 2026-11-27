@@ -103,6 +103,10 @@ document.getElementById("fundishaBtn").onclick = function(){
   alert("Asante! Model imejifunza ujumbe mpya. Sasa inajua ujumbe "+trainingData.length);
   document.getElementById("fundishaBox").value="";
 };
-jifunze();</script>
+jifunze();</script><script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+}
+</script>
 </body>
 </html>
